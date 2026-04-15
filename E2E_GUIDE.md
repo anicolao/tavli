@@ -1,6 +1,6 @@
-# E2E Testing Guide: Chess Tabletop
+# E2E Testing Guide: Tavli
 
-This document is the **definitive guide** for writing End-to-End (E2E) tests for Chess Tabletop. It is designed to ensure robust, deterministic, and self-documenting tests.
+This document is the **definitive guide** for writing End-to-End (E2E) tests for Tavli. It is designed to ensure robust, deterministic, and self-documenting tests.
 
 ## 1. The Philosophy: "Zero-Pixel Tolerance"
 
@@ -50,9 +50,9 @@ test('Board renders correctly', async ({ page }, testInfo) => {
   await page.goto('/');
 
   await tester.step('initial-load', {
-    description: 'Starting Chess Position',
+    description: 'Starting Backgammon Position',
     verifications: [
-      { spec: 'Board is visible', check: async () => await expect(page.locator('.chess-board')).toBeVisible() },
+      { spec: 'Board is visible', check: async () => await expect(page.locator('.backgammon-board')).toBeVisible() },
       { spec: 'White player to move', check: async () => await expect(page.locator('.turn-indicator')).toHaveText('White to move') }
     ]
   });

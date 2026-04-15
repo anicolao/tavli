@@ -1,13 +1,13 @@
 # MVP Design: Tavli
 
 ## Objective
-Deliver a functional Backgammon (Tavli) game that supports two-player local play on a single touchscreen table.
+Deliver a functional Backgammon (Tavli) game that supports two-player local play on a single touchscreen table. While the MVP focuses on local play, the eventual main target is network play over mobile phones.
 
 ## Architecture
 - **Framework**: SvelteKit (Svelte 5) for component-based UI.
 - **State Management**: Redux Toolkit combined with Event Sourcing for robust game and UI state tracking.
 - **Game Logic**: Custom implementation of Backgammon rules including board points, checker movement, and dice logic.
-- **Rendering**: A responsive, touch-friendly board using HTML/CSS/SVG.
+- **Rendering**: A responsive, touch-friendly board using HTML/CSS/SVG. **The design must be fully responsive and adapt to various screen sizes.**
 - **Persistence**: Local storage for game state recovery.
 - **Hosting**: Static hosting on GitHub Pages with PR preview support.
 
