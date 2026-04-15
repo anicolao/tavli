@@ -3,7 +3,7 @@
 
     let { turn, winner, checkersOff, onReset }: { 
         turn: Player; 
-        winner: Player | null;
+        winner: Player | 'draw' | null;
         checkersOff: { 1: number; 2: number };
         onReset: () => void;
     } = $props();
@@ -11,7 +11,10 @@
 
 <div class="game-info">
     <div class="status">
-        {#if winner}
+        {#if winner === 'draw'}
+            <h2 class="winner">It's a Draw!</h2>
+            <button onclick={onReset}>Play Again</button>
+        {:else if winner}
             <h2 class="winner">Player {winner === 1 ? 'Light' : 'Dark'} Wins!</h2>
             <button onclick={onReset}>Play Again</button>
         {:else}
