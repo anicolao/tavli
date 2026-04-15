@@ -86,4 +86,27 @@ describe('gameSlice', () => {
         expect(nextState.board[0]).toEqual([]);
         expect(nextState.winner).toBe(2);
     });
+
+    it('should handle draw when both mother checkers are pinned', () => {
+        const initialState = gameReducer(undefined, { type: '@@INIT' });
+        const state = {
+            ...initialState,
+            board: initialState.board.map(p => [...p]),
+            movesRemaining: [1],
+            turn: 1 as Player,
+        };
+        
+        // P1 mother pinned by P2 at index 23
+        state.board[23] = [1, 2];
+        // P2 mother on point 1 (index 0)
+        state.board[0] = [2];
+        // P1 checker on point 2 (index 1)
+        state.board[1] = [1];
+        
+        // P1 moves to index 0, pinning P2 mother
+        const nextState = gameReducer(state, moveChecker({ fromIndex: 1, toIndex: 0 }));
+        
+        expect(nextState.board[0]).toEqual([2, 1]);
+        expect(nextState.winner).toBe('draw');
+    });
 });

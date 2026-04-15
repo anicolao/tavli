@@ -5,7 +5,7 @@ export interface GameState {
     dice: number[];
     movesRemaining: number[];
     turn: Player;
-    winner: Player | null;
+    winner: Player | 'draw' | null;
     checkersOff: {
         1: number;
         2: number;

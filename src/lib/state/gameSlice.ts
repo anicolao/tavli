@@ -122,7 +122,9 @@ function checkWinner(state: GameState) {
     const p1MotherAtHome = state.board[23].some(p => p === 1);
     const p2MotherAtHome = state.board[0].some(p => p === 2);
 
-    if (p1MotherPinned && !p2MotherAtHome) {
+    if (p1MotherPinned && p2MotherPinned) {
+        state.winner = 'draw';
+    } else if (p1MotherPinned && !p2MotherAtHome) {
         state.winner = 2;
     } else if (p2MotherPinned && !p1MotherAtHome) {
         state.winner = 1;
