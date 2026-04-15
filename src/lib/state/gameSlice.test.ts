@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import gameReducer, { moveChecker, rollDice } from './gameSlice';
-import { Player } from '../game/types';
+import type { Player } from '../game/types';
 
 describe('gameSlice', () => {
     it('should handle mother checker pin win for Player 1', () => {
