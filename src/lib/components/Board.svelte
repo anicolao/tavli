@@ -38,9 +38,11 @@
         }
     }
 
-    // Split points into top and bottom rows for layout
-    const bottomRow = $derived(gameState.board.slice(0, 12)); // 0-11
-    const topRow = $derived(gameState.board.slice(12, 24).reverse()); // 23-12 (view from top)
+    // Split points into quadrants for layout
+    const topLeft = $derived(gameState.board.slice(18, 24).reverse()); // 23-18
+    const topRight = $derived(gameState.board.slice(12, 18).reverse()); // 17-12
+    const bottomLeft = $derived(gameState.board.slice(0, 6)); // 0-5
+    const bottomRight = $derived(gameState.board.slice(6, 12)); // 6-11
 </script>
 
 <div class="game-container">
@@ -68,8 +70,8 @@
     </div>
 
     <div class="board">
-        <div class="row top-row">
-            {#each topRow as checkers, i}
+        <div class="quadrant top-left">
+            {#each topLeft as checkers, i}
                 <Point 
                     index={23 - i} 
                     {checkers} 
@@ -80,14 +82,38 @@
             {/each}
         </div>
         
-        <div class="bar-separator"></div>
+        <div class="bar"></div>
 
-        <div class="row bottom-row">
-            {#each bottomRow as checkers, i}
+        <div class="quadrant top-right">
+            {#each topRight as checkers, i}
+                <Point 
+                    index={17 - i} 
+                    {checkers} 
+                    isHighlighted={legalMoves.includes(17 - i)}
+                    onSelect={handleSelect}
+                    onMoveTo={handleMoveTo}
+                />
+            {/each}
+        </div>
+
+        <div class="quadrant bottom-left">
+            {#each bottomLeft as checkers, i}
                 <Point 
                     index={i} 
                     {checkers} 
                     isHighlighted={legalMoves.includes(i)}
+                    onSelect={handleSelect}
+                    onMoveTo={handleMoveTo}
+                />
+            {/each}
+        </div>
+
+        <div class="quadrant bottom-right">
+            {#each bottomRight as checkers, i}
+                <Point 
+                    index={6 + i} 
+                    {checkers} 
+                    isHighlighted={legalMoves.includes(6 + i)}
                     onSelect={handleSelect}
                     onMoveTo={handleMoveTo}
                 />
@@ -116,33 +142,29 @@
     }
 
     .board {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr 40px 1fr;
+        grid-template-rows: 1fr 1fr;
         background-color: #444;
         border: 10px solid #222;
         border-radius: 4px;
         flex-grow: 1;
-        position: relative;
+        overflow: hidden;
     }
 
-    .row {
+    .quadrant {
         display: flex;
-        height: 50%;
+        height: 100%;
     }
 
-    .top-row {
-        border-bottom: 2px solid #222;
+    .top-left, .top-right {
+        border-bottom: 1px solid #222;
     }
 
-    .bar-separator {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        width: 40px;
+    .bar {
         background-color: #222;
-        transform: translateX(-50%);
-        z-index: 5;
+        grid-row: 1 / span 2;
+        grid-column: 2;
     }
 
     .bear-off-actions {
