@@ -16,10 +16,12 @@ Deliver a functional Backgammon (Tavli) game that supports two-player local play
 2. **Point**: Individual triangle on the board, handling drop events.
 3. **Checker**: Visual representation of a piece, handling drag events.
 4. **Dice**: Logic and UI for rolling and displaying dice results.
-5. **GameInfo**: UI showing current turn, score, and doubling cube status.
+5. **GameInfo**: UI showing current turn and score.
 
 ## MVP Features
-- Full implementation of standard Backgammon rules.
+- Full implementation of Plakoto (Tapa) rules:
+  - Pinning opponent checkers instead of hitting.
+  - Mother checker win condition.
 - Local multiplayer support on a single device.
 - Dice rolling and legal move highlighting.
 - Win detection and game reset.
