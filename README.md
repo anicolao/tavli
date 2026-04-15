@@ -1,11 +1,42 @@
-# Tavli
+# sv
 
-Tavli is more than just a game; it's a centerpiece of Mediterranean life. From the bustling cafés of Athens to the tea houses of Istanbul and the vibrant squares of Beirut, the clatter of dice and the sharp *thwack* of wooden checkers on a board are the heartbeat of the social scene.
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-This platform brings the authentic experience of Mediterranean Backgammon—Tavli or Tavla—to the digital world. We don't just offer "Western" backgammon; we celebrate the deep strategy and cultural heritage of the three classic variants typically played in succession:
+## Creating a project
 
-*   **Portes**: The traditional game most similar to Western backgammon, but played with the characteristic speed and aggression of the Mediterranean style.
-*   **Plakoto**: A deep, tactical variant where checkers can be pinned, leading to tense standoffs and dramatic reversals.
-*   **Fevga**: A game of elegant maneuvers and blocking, where both players move in the same direction and every move counts.
+If you're seeing this, you've probably already done this step. Congrats!
 
-Our goal is to recreate the "Neo-Café"—a digital space that feels as warm, social, and competitive as your favorite local haunt. Whether you're a seasoned *tavladji* or a curious newcomer, Tavli offers a seat at the table.
+```sh
+# create a new project
+npx sv create my-app
+```
+
+To recreate this project with the same configuration:
+
+```sh
+# recreate this project
+npx sv@0.15.1 create --template minimal --types ts --add playwright vitest="usages:unit" sveltekit-adapter="adapter:static" --no-download-check --install npm .
+```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```sh
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```sh
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
