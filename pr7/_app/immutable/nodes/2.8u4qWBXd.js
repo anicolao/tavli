@@ -1,0 +1,1 @@
+import{f as e,m as t}from"../chunks/DLxOqd-F.js";import"../chunks/D1hYfEew.js";var n=t(`<h1>Tavli - Backgammon</h1>`);function r(t){e(t,n())}export{r as component};
