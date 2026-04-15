@@ -112,23 +112,19 @@ function checkWinner(state: GameState) {
     // P1 mother checker is at index 23
     // P2 mother checker is at index 0
     
-    // P1 loses if their last checker at index 23 is pinned by P2
-    if (state.board[23].length >= 2 && state.board[23][0] === 1 && state.board[23][1] === 2) {
-        // P1 mother checker pinned.
-        // But wait, it only counts if it's the LAST one.
-        // In Plakoto point array [1, 2], the 1 is pinned.
-        // If there were [1, 1, 2], that's impossible in Plakoto because you can't pin a point with 2+ checkers.
-        // So if board[23][0] is 1 and board[23][1] is 2, then the mother checker IS pinned.
-        // We need to check if P1 still has their mother checker at point 24?
-        // Actually, if they moved all other 14 checkers and the 15th one is pinned at home, they lose.
-        
-        // Let's refine Mother Checker Rule:
-        // "If a player pins the opponent's mother checker on its starting point, they win."
-        // We need to be careful if BOTH are pinned (draw), but for MVP let's keep it simple.
+    // P1 mother checker is pinned if the bottom checker is 1 and there is a 2 on top of it.
+    const p1MotherPinned = state.board[23].length >= 2 && state.board[23][0] === 1 && state.board[23][1] === 2;
+    // P2 mother checker is pinned if the bottom checker is 2 and there is a 1 on top of it.
+    const p2MotherPinned = state.board[0].length >= 2 && state.board[0][0] === 2 && state.board[0][1] === 1;
+
+    // A player still has their mother checker at home if any of their checkers are at their starting point.
+    // In Plakoto, all 15 start there, so if the point has any of your checkers, the mother checker (the last one) is still there.
+    const p1MotherAtHome = state.board[23].some(p => p === 1);
+    const p2MotherAtHome = state.board[0].some(p => p === 2);
+
+    if (p1MotherPinned && !p2MotherAtHome) {
         state.winner = 2;
-    }
-    
-    if (state.board[0].length >= 2 && state.board[0][0] === 2 && state.board[0][1] === 1) {
+    } else if (p2MotherPinned && !p1MotherAtHome) {
         state.winner = 1;
     }
 }
