@@ -52,25 +52,23 @@
     .point::before {
         content: '';
         position: absolute;
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent;
+        width: 100%;
+        height: 200px;
+        background-color: #555;
     }
 
     .top::before {
         top: 0;
-        border-top: 200px solid #555;
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
     }
 
     .bottom::before {
         bottom: 0;
-        border-bottom: 200px solid #555;
+        clip-path: polygon(50% 0, 0 100%, 100% 100%);
     }
 
     .point:nth-child(even)::before {
-        border-top-color: #777;
-        border-bottom-color: #777;
+        background-color: #777;
     }
 
     .highlight::after {

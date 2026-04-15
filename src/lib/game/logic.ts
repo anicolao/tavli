@@ -30,12 +30,13 @@ export const getLegalMoves = (state: GameState, fromIndex: number): number[] => 
         if (toIndex >= 0 && toIndex < 24) {
             const targetPoint = board[toIndex];
             if (targetPoint.length === 0) {
+                // Empty point is always legal
                 legalToIndices.push(toIndex);
-            } else if (targetPoint.includes(turn)) {
-                // Own point or pinning opponent
+            } else if (targetPoint[targetPoint.length - 1] === turn) {
+                // Controlled by us (either our own point or we are pinning them)
                 legalToIndices.push(toIndex);
             } else if (targetPoint.length === 1) {
-                // Can pin exactly one opponent checker
+                // Exactly one opponent checker - we can pin it
                 legalToIndices.push(toIndex);
             }
             // else: 2+ opponent checkers OR they are pinning us -> blocked
