@@ -1,42 +1,35 @@
-# sv
+# Tavli
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern, SvelteKit-powered Backgammon (Tavli) game designed for touchscreens and eventual network play.
 
-## Creating a project
+## Tech Stack
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.15.1 create --template minimal --types ts --add playwright vitest="usages:unit" sveltekit-adapter="adapter:static" --no-download-check --install npm .
-```
+- **Framework**: [Svelte 5](https://svelte.dev/) with [SvelteKit](https://kit.svelte.dev/)
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/) via `svelte-redux`
+- **Testing**: [Playwright](https://playwright.dev/) for E2E tests, [Vitest](https://vitest.dev/) for unit tests
+- **Styling**: Vanilla CSS for maximum flexibility and performance
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-```sh
-npm run dev
+2. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+3. **Open the app**:
+   Navigate to `http://localhost:5173` in your browser.
 
-## Building
+## Testing
 
-To create a production version of your app:
+- **Run all tests**: `npm test`
+- **Run E2E tests**: `npm run test:e2e`
+- **Run unit tests**: `npm run test:unit`
 
-```sh
-npm run build
-```
+## Architecture
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+The project follows an event-sourced architecture for game state, ensuring deterministic behavior and easy debugging. For more details, see [MVP_DESIGN.md](./MVP_DESIGN.md) and [VISION.md](./VISION.md).
