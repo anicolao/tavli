@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { getLegalMoves, isBearOffLegal, getLegalBearOffMoves } from './logic';
-import { Player, GameState } from './types';
+import type { Player, GameState } from './types';
 
 const createEmptyBoard = (): Player[][] => Array.from({ length: 24 }, () => []);
 
@@ -52,6 +52,22 @@ describe('Game Logic', () => {
             
             const moves = getLegalMoves(state, 5);
             expect(moves).not.toContain(7);
+        });
+
+        it('should allow landing on a point with a pinning checker', () => {
+            const state: GameState = {
+                board: createEmptyBoard(),
+                dice: [2],
+                movesRemaining: [2],
+                turn: 2,
+                winner: null,
+                checkersOff: { 1: 0, 2: 0 },
+            };
+            state.board[5] = [2];
+            state.board[7] = [1, 2]; // Player 2 is already pinning Player 1
+            
+            const moves = getLegalMoves(state, 5);
+            expect(moves).toContain(7);
         });
     });
 

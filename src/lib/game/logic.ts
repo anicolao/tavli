@@ -1,4 +1,4 @@
-import { Player, GameState } from './types';
+import type { Player, GameState } from './types';
 
 export const getLegalMoves = (state: GameState, fromIndex: number): number[] => {
     const { board, movesRemaining, turn } = state;
@@ -31,8 +31,8 @@ export const getLegalMoves = (state: GameState, fromIndex: number): number[] => 
             const targetPoint = board[toIndex];
             if (targetPoint.length === 0) {
                 legalToIndices.push(toIndex);
-            } else if (targetPoint[0] === turn) {
-                // Own point
+            } else if (targetPoint.includes(turn)) {
+                // Own point or pinning opponent
                 legalToIndices.push(toIndex);
             } else if (targetPoint.length === 1) {
                 // Can pin exactly one opponent checker

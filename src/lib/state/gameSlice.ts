@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Player, GameState } from '../game/types';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { Player, GameState } from '../game/types';
 
 const INITIAL_CHECKERS = 15;
 

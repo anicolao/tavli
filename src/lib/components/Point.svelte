@@ -16,7 +16,7 @@
         onMoveTo?: (index: number) => void;
     } = $props();
 
-    const isTopPoint = index >= 12; // 12-23 are top
+    const isTopPoint = $derived(index >= 12); // 12-23 are top
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
