@@ -9,8 +9,8 @@
 
 <style>
     .checker {
-        width: 40px;
-        height: 40px;
+        width: 100%;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         border: 2px solid #333;
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);

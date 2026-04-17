@@ -104,13 +104,14 @@
 
     .checker-wrapper {
         position: absolute;
+        width: 100%;
     }
 
     .bottom .checker-wrapper {
-        bottom: var(--offset);
+        bottom: calc(5px + var(--offset));
     }
 
     .top .checker-wrapper {
-        top: var(--offset);
+        top: calc(5px + var(--offset));
     }
 </style>

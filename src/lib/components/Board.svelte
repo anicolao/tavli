@@ -149,7 +149,6 @@
         border: 10px solid #222;
         border-radius: 4px;
         flex-grow: 1;
-        overflow: hidden;
     }
 
     .quadrant {
