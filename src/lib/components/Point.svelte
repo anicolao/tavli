@@ -27,6 +27,7 @@
     class:top={isTopPoint}
     class:bottom={!isTopPoint}
     onclick={() => isHighlighted ? onMoveTo?.(index) : onSelect?.(index)}
+    data-index={index}
 >
     <div class="checker-container" class:reverse={isTopPoint}>
         {#each checkers as player, i}
