@@ -107,3 +107,19 @@ export const getLegalBearOffMoves = (state: GameState, fromIndex: number): numbe
     
     return Array.from(new Set(legalDice));
 };
+
+export const hasAnyLegalMoves = (state: GameState): boolean => {
+    const { turn } = state;
+    
+    // Check all points on the board
+    for (let i = 0; i < 24; i++) {
+        if (getLegalMoves(state, i).length > 0) {
+            return true;
+        }
+        if (getLegalBearOffMoves(state, i).length > 0) {
+            return true;
+        }
+    }
+    
+    return false;
+};

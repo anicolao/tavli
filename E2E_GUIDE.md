@@ -52,8 +52,8 @@ test('Board renders correctly', async ({ page }, testInfo) => {
   await tester.step('initial-load', {
     description: 'Starting Backgammon Position',
     verifications: [
-      { spec: 'Board is visible', check: async () => await expect(page.locator('.backgammon-board')).toBeVisible() },
-      { spec: 'White player to move', check: async () => await expect(page.locator('.turn-indicator')).toHaveText('White to move') }
+      { spec: 'Board is visible', check: async () => await expect(page.locator('.board')).toBeVisible() },
+      { spec: 'Light player to move', check: async () => await expect(page.locator('h2')).toContainText('Turn: Player Light') }
     ]
   });
 

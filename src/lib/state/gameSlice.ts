@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { Player, GameState } from '../game/types';
+import { getLegalMoves, hasAnyLegalMoves, getLegalBearOffMoves } from '../game/logic';
 
 const INITIAL_CHECKERS = 15;
 
@@ -41,18 +42,26 @@ export const gameSlice = createSlice({
             } else {
                 state.movesRemaining = [d1, d2];
             }
+
+            // If no legal moves possible with this roll, turn ends immediately
+            if (!hasAnyLegalMoves(state)) {
+                state.turn = state.turn === 1 ? 2 : 1;
+                state.movesRemaining = [];
+                state.dice = [];
+            }
         },
         moveChecker: (state, action: PayloadAction<{ fromIndex: number; toIndex: number }>) => {
             const { fromIndex, toIndex } = action.payload;
             const player = state.turn;
             
-            // Logic for move validation should probably be here or in a separate helper
-            // For now, let's assume UI only sends valid moves
+            // Validate move
+            const legalMoves = getLegalMoves(state, fromIndex);
+            if (!legalMoves.includes(toIndex)) return;
             
             const distance = Math.abs(fromIndex - toIndex);
             const moveIndex = state.movesRemaining.indexOf(distance);
             
-            if (moveIndex === -1) return; // Invalid move distance
+            if (moveIndex === -1) return; // Should not happen if legalMoves is correct
             
             // Execute move
             const checker = state.board[fromIndex].pop();
@@ -64,15 +73,20 @@ export const gameSlice = createSlice({
             // Check win conditions
             checkWinner(state);
             
-            // Change turn if no moves left
-            if (state.movesRemaining.length === 0) {
+            // Change turn if no moves left or no LEGAL moves left
+            if (state.movesRemaining.length === 0 || !hasAnyLegalMoves(state)) {
                 state.turn = state.turn === 1 ? 2 : 1;
+                state.movesRemaining = [];
                 state.dice = [];
             }
         },
         bearOff: (state, action: PayloadAction<{ fromIndex: number; dieValue: number }>) => {
             const { fromIndex, dieValue } = action.payload;
             const player = state.turn;
+            
+            // Validate bear off
+            const legalDice = getLegalBearOffMoves(state, fromIndex);
+            if (!legalDice.includes(dieValue)) return;
             
             const moveIndex = state.movesRemaining.indexOf(dieValue);
             if (moveIndex === -1) return;
@@ -85,14 +99,18 @@ export const gameSlice = createSlice({
             
             checkWinner(state);
             
-            if (state.movesRemaining.length === 0) {
+            if (state.movesRemaining.length === 0 || !hasAnyLegalMoves(state)) {
                 state.turn = state.turn === 1 ? 2 : 1;
+                state.movesRemaining = [];
                 state.dice = [];
             }
         },
         resetGame: (state) => {
             Object.assign(state, initialState);
             state.board = createInitialBoard();
+        },
+        setGameState: (state, action: PayloadAction<Partial<GameState>>) => {
+            Object.assign(state, action.payload);
         }
     },
 });
@@ -131,5 +149,5 @@ function checkWinner(state: GameState) {
     }
 }
 
-export const { rollDice, moveChecker, bearOff, resetGame } = gameSlice.actions;
+export const { rollDice, moveChecker, bearOff, resetGame, setGameState } = gameSlice.actions;
 export default gameSlice.reducer;

@@ -8,7 +8,7 @@
 </svelte:head>
 
 <main>
-    <h1 class="sr-only">Tavli - Backgammon</h1>
+    <h1 class="sr-only">Tavli - Plakoto</h1>
     <Board />
 </main>
 
