@@ -30,7 +30,7 @@ test('Plakoto rules: No doubling cube, pinning works, and mother checker win', a
             // Setup state for pinning
             await page.evaluate(() => {
                 const { store } = window as any;
-                const board = Array.from({ length: 24 }, () => []);
+                const board: any[][] = Array.from({ length: 24 }, () => []);
                 board[10] = [1]; // P1 at index 10
                 board[8] = [2];  // P2 at index 8
                 store.dispatch({ 
@@ -88,7 +88,7 @@ test('Plakoto rules: No doubling cube, pinning works, and mother checker win', a
         check: async () => {
             await page.evaluate(() => {
                 const { store } = window as any;
-                const board = Array.from({ length: 24 }, () => []);
+                const board: any[][] = Array.from({ length: 24 }, () => []);
                 board[23] = [1]; // P1 mother checker at index 23
                 board[21] = [2]; // P2 checker nearby at index 21
                 store.dispatch({ 

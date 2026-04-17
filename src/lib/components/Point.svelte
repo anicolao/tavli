@@ -40,8 +40,9 @@
 
 <style>
     .point {
-        width: 60px;
-        height: 250px;
+        flex: 1;
+        min-width: 0;
+        height: 100%;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -54,7 +55,7 @@
         content: '';
         position: absolute;
         width: 100%;
-        height: 200px;
+        height: 45%;
         background-color: #555;
     }
 
