@@ -161,6 +161,10 @@
         border-bottom: 1px solid #222;
     }
 
+    .bottom-left, .bottom-right {
+        align-items: flex-end;
+    }
+
     .bar {
         background-color: #222;
         grid-row: 1 / span 2;
