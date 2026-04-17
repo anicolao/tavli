@@ -1,6 +1,6 @@
 # Tavli
 
-A modern, SvelteKit-powered Backgammon (Tavli) game designed for touchscreens and eventual network play.
+A modern, SvelteKit-powered Plakoto (Tavli) game designed for touchscreens and eventual network play.
 
 ## Tech Stack
 
